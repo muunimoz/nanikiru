@@ -31,3 +31,6 @@
 - 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
 - アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。
 - 使用しない場合は、使用素材の項目をREADMEから削除してください。
+
+#### 実装機能リスト
+https://docs.google.com/spreadsheets/d/1r7gLND0ciEntaUju7oi7x5UP7p7y5bXLpELOqlZ_YVA/edit?usp=sharing
