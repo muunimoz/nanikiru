@@ -11,6 +11,35 @@
   </head>
 
   <body>
+    <header>
+      <% if user_signed_in? %>
+        <p>
+          <%= link_to "ナニキル？って", about_path %>
+        </p>
+        <p>
+          <%#= link_to "Myページ", _path %>
+        </p>
+        <p>
+          <%#= link_to "ALL", _path %>
+        </p>
+        <p>
+          <%#= link_to "検索", _path %>
+        </p>
+        <p>
+          <%= link_to "ログアウト", destroy_user_session_path %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to "ナニキルって？", about_path %>
+        </p>
+        <p>
+          <%=link_to "新規登録",  new_user_registration_path %>
+        </p>
+        <p>
+          <%=link_to "ログイン",  new_user_session_path %>
+        </p>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>
