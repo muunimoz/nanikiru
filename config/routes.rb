@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   
   root to: "homes#top"
    get "about" => "homes#about"
+   
+  devise_scope :user do
+     post 'user/gest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
   
  
   

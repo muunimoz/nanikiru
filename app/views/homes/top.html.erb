@@ -1,5 +1,5 @@
 <h1>ナニキル？</h1>
 
-<p><%#=link_to "ゲストログイン"%></p>
-<p><%=link_to "新規登録",  new_user_registration_path %></p>
-<p><%=link_to "ログイン",  new_user_session_path %></p>
+<p><%=link_to "ゲストログイン", user_gest_sign_in_path ,method: :post %></p>
+<p><%=link_to "新規登録", new_user_registration_path %></p>
+<p><%=link_to "ログイン", new_user_session_path %></p>
