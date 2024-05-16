@@ -1,0 +1,16 @@
+<h1>カテゴリー（気温）一覧</h1>
+
+<%= form_with model: Temperature.new, url: admin_temperatures_path do |f| %>
+<h4>気温名登録</h4>
+  <%= f.text_field :temperatures_name %>
+
+  <%= f.submit '登録' %>
+
+<% end %>
+
+<% @temperatures.each do |temperature| %>
+  <p>気温名</p>
+  <%= temperature.temperatures_name %>
+  <%= link_to "編集", edit_admin_temperature_path(temperature.id) %>
+  <%= link_to "削除", admin_temperature_path(temperature.id), method: :delete %>
+<% end %>
