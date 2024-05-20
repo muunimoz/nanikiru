@@ -14,8 +14,13 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
   
+  def search
+    @post = Post.search(params[:keyword])
+  end
+  
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   def edit
@@ -39,4 +44,5 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:image, :comments)
   end
+  
 end

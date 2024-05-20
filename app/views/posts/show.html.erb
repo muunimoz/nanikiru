@@ -1,9 +1,26 @@
 <h1>詳細</h1>
 
   <%= image_tag @post.get_image %>
-  <p>ユーザーネーム：<%#= @post.user.name %></p>
+  <p>ユーザーネーム：<%= @post.user.name %></p>
   <p>コメント：<%= @post.comments %></p>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
 
   <%= link_to "編集", edit_post_path(@post.id) %>
 
+<div>
+  <p>コメント件数：<%= @post.post_comments.count %></p>
+  <% @post.post_comments.each do |comment| %>
+    <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    <% if comment.user == current_user %>
+      <%#= link_to "削除", comment_path(comment.post, comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@post, @comment] do |f| %>
+    <%= f.text_area :comment, placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

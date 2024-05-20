@@ -1,7 +1,16 @@
 class Post < ApplicationRecord
   
   has_one_attached :image
-  # belongs_to :user
+  belongs_to :user
+  has_many :post_comments, class_name: "Comment", dependent: :destroy
+  
+  def self.search(search)
+    if search != ""
+      Post.where('post_commets LIKE(?)', "%#{search}%")
+    else
+      Post.all
+    end
+  end
   
   def get_image
     unless image.attached?

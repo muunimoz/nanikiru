@@ -1,6 +1,12 @@
 <h1>ALL</h1>
 <%=link_to "新規投稿する", new_post_path %>
 
+<%= form_with(url: search_posts_path, local: true, method: :get ) do |f| %>
+  <%= f.text_field :keyword %>
+  <%= f.submit "検索" %>
+<% end %>
+
+
 <% @posts.each do |post| %>
   <div>
     <%= image_tag post.get_image %>
