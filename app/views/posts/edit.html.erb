@@ -1,8 +1,10 @@
 <h1>投稿編集</h1>
 
 <%= form_with model: @post do |f| %>
-  <h4>コメント</h4>
-  <%= f.text_field :comments %>
+ <%= image_tag @post.get_image %>
+
+　<h4>説明</h4>
+  <%= f.text_field :text %>
   
   <%= f.submit '更新' %>
   <%= link_to "削除", post_path(@post.id), method: :delete %>

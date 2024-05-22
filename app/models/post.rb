@@ -2,11 +2,11 @@ class Post < ApplicationRecord
   
   has_one_attached :image
   belongs_to :user
-  has_many :post_comments, class_name: "Comment", dependent: :destroy
+  has_many :comment, dependent: :destroy
   
   def self.search(search)
     if search != ""
-      Post.where('post_commets LIKE(?)', "%#{search}%")
+      Post.where('text LIKE(?)', "%#{search}%")
     else
       Post.all
     end

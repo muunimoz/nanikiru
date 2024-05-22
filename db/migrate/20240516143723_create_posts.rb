@@ -5,9 +5,9 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.timestamps
       
       t.integer :user_id
-      t.integer :area_id
+      t.integer :area_id 
       t.integer :temperature_id
-      t.string :comments
+      t.string :text, null: false
       
     end
   end

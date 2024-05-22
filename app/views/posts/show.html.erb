@@ -2,14 +2,16 @@
 
   <%= image_tag @post.get_image %>
   <p>ユーザーネーム：<%= @post.user.name %></p>
-  <p>コメント：<%= @post.comments %></p>
+  <p>説明：<%= @post.text %></p>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-
-  <%= link_to "編集", edit_post_path(@post.id) %>
+  
+  <% if @post.user == current_user %>
+    <%= link_to "編集", edit_post_path(@post.id) %>
+  <% end %>
 
 <div>
-  <p>コメント件数：<%= @post.post_comments.count %></p>
-  <% @post.post_comments.each do |comment| %>
+  <p>コメント件数：<%= @post.comment.count %></p>
+  <% @post.comment.each do |comment| %>
     <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
     <%= comment.user.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>

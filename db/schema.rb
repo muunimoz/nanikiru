@@ -53,15 +53,16 @@ ActiveRecord::Schema.define(version: 2024_05_20_093808) do
   end
 
   create_table "areas", force: :cascade do |t|
-    t.string "area_name"
+    t.string "area_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_name"], name: "index_areas_on_area_name"
   end
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "post_id"
-    t.string "comment"
+    t.string "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -72,13 +73,13 @@ ActiveRecord::Schema.define(version: 2024_05_20_093808) do
     t.integer "user_id"
     t.integer "area_id"
     t.integer "temperature_id"
-    t.string "comments"
+    t.string "text", null: false
   end
 
   create_table "temperatures", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "temperatures_name"
+    t.string "temperature_name", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,7 +88,8 @@ ActiveRecord::Schema.define(version: 2024_05_20_093808) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name"
+    t.string "name", null: false
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
