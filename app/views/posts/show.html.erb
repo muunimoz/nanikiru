@@ -8,14 +8,28 @@
   <% if @post.user == current_user %>
     <%= link_to "編集", edit_post_path(@post.id) %>
   <% end %>
+  
+  <% if @post.favorited_by?(current_user) %>
+    <p>
+      <%= link_to post_favorite_path(@post), method: :delete do %>
+        ♥<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_favorite_path(@post), method: :post do %>
+        ♡<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
 
 <div>
-  <p>コメント件数：<%= @post.comment.count %></p>
-  <% @post.comment.each do |comment| %>
-    <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
-    <%= comment.user.name %>
-    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-    <% if comment.user == current_user %>
+  <p>コメント件数：<%= @post.comments.count %></p>
+  <% @post.comments.each do |comments| %>
+    <p><%= image_tag comments.user.get_profile_image(100,100) %></p>
+    <%= comments.user.name %>
+    <%= comments.created_at.strftime('%Y/%m/%d') %><%= comments.comment %>
+    <% if comments.user == current_user %>
       <%#= link_to "削除", comment_path(comment.post, comment), method: :delete %>
     <% end %>
   <% end %>
