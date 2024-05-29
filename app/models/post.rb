@@ -4,13 +4,22 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :areas, dependent: :destroy
+  has_many :temperatures, dependent: :destroy
   
-  def self.search(search)
-    if search != ""
-      Post.where('text LIKE(?)', "%#{search}%")
+  def self.search(keyword, area_name, temperature_name)
+    if keyword.present?
+      @posts = Post.where('text LIKE(?)', "%#{keyword}%")
     else
-      Post.all
+      @posts = Post.all
     end
+    if area_name.present?
+      @posts = @posts.left_joins(:areas).where(areas:{area_name: area_name})
+    end
+    if temperature_name.present?
+      @posts = @posts.left_joins(:temperatures).where(temperatures:{temperature_name: temperature_name})
+    end
+    @posts
   end
   
   def get_image

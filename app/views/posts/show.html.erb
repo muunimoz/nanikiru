@@ -22,6 +22,12 @@
       <% end %>
     </p>
   <% end %>
+  
+  <% @favorite_users.each do |user| %>
+  <div>
+    <%= link_to image_tag(@user.get_profile_image(100,100)), user_path(user.id) %>
+  </div>
+  <% end %>
 
 <div>
   <p>コメント件数：<%= @post.comments.count %></p>
@@ -30,7 +36,7 @@
     <%= comments.user.name %>
     <%= comments.created_at.strftime('%Y/%m/%d') %><%= comments.comment %>
     <% if comments.user == current_user %>
-      <%#= link_to "削除", comment_path(comment.post, comment), method: :delete %>
+      <%= link_to "削除", post_comment_path(comments.post, comments), method: :delete %>
     <% end %>
   <% end %>
 </div>

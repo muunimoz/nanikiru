@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   end
   
   def create
-   
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.save
@@ -16,11 +15,14 @@ class PostsController < ApplicationController
   end
   
   def search
-    @post = Post.search(params[:keyword])
+    @posts = Post.search(params[:keyword], params[:area_name], params[:temperature_name])
   end
   
   def show
     @post = Post.find(params[:id])
+    @user = User.find(params[:id])
+    favorites = Favorite.where(post_id: @post.id).pluck(:user_id)
+    @favorite_users = User.find(favorites)
     @comment = Comment.new
   end
 
@@ -43,7 +45,7 @@ class PostsController < ApplicationController
   private
   
   def post_params
-    params.require(:post).permit(:image, :text)
+    params.require(:post).permit(:image, :text, :area_id, :temperature_id )
   end
   
 end

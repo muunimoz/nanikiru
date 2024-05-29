@@ -1,15 +1,28 @@
 <h1>新規投稿</h1>
 
-<%= form_with model: @post, url: posts_path do |f| %>
-<h4>画像</h4>
-<%= f.file_field :image, accept: "image/*" %>
+  <%= form_with model: @post, url: posts_path do |f| %>
+    <h4>画像</h4>
+    <%= f.file_field :image, accept: "image/*" %>
+    
+    <%= form_with model: @area, local: true do |f| %>
+      <h4>地域</h4>
+      <%= f.select :area_name, options_from_collection_for_select( Area.all, :area_name, :area_name), {prompt: "選択してください"} %>
+    <% end %>
+  
+    <%= form_with model: @temperature, local: true do |f| %>
+      <h4>"気温"</h4>
+      <%= f.select :temperature_name, options_from_collection_for_select( Temperature.all, :temperature_name, :temperature_name), {prompt: "選択してください"} %>
+    <% end %>
+    
+    <h4>説明</h4>
+    <%= f.text_field :text %>
+    
+    <%= f.submit '投稿' %>
+  <% end %>
 
-<!--<h4>カテゴリー</h4>-->
+  
+  
 
-<h4>説明</h4>
-<%= f.text_field :text %>
-
-<%= f.submit '投稿' %>
-<% end %>
+  
 
 

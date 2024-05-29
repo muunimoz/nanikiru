@@ -1,7 +1,17 @@
 <h1>マイページ</h1>
   <div>
-    <h3><%#= user.name %></h3>
-    <%#= image_tag user.get_profile_image(100,100) %>
+    <h3><%= @user.name %></h3>
+    <%= image_tag @user.get_profile_image(100,100) %>
+    
+    <%= link_to "編集", edit_user_path(@user.id) %>
   </div>
+  
+  <%= link_to "いいね",  favorites_user_path(@user) %>
+  
+  <% @posts.each do |post| %>
+  <div>
+    <%= link_to image_tag(post.get_image), post_path(post.id) %>
+  </div>
+<% end %>
   
   

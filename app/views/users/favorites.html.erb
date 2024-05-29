@@ -1,0 +1,7 @@
+<h1>いいね投稿一覧</h1>
+
+<% @favorite_posts.each do |post| %>
+  <div>
+    <%= link_to image_tag(post.get_image), post_path(post.id) %>
+  </div>
+<% end %>

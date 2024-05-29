@@ -8,7 +8,7 @@ class Admin::AreasController < ApplicationController
   def create
     area = Area.new(area_params)
     area.save
-    redirect_to areas_path
+    redirect_to admin_areas_path
   end
   
   def edit
@@ -18,13 +18,13 @@ class Admin::AreasController < ApplicationController
   def update
     area = Area.find(params[:id])
     area.update(area_params)
-    redirect_to areas_path
+    redirect_to admin_areas_path
   end
   
   def destroy
     area = Area.find(params[:id])
     area.destroy
-    redirect_to areas_path
+    redirect_to admin_areas_path
   end
   
   private

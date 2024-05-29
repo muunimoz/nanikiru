@@ -1,11 +1,11 @@
 検索画面
 
-<% @post.each do |post| %>
-  <% if post.text.include?(params[:keyword]) %>
+<% @posts.each do |post| %>
+  <%# if post.text.include?(params[:keyword]) %>
     <div>
       <%= image_tag post.get_image %>
       説明：<%= post.text %>
       <%= link_to "詳細", post_path(post.id) %>
     </div>
-  <% end %>
+  <%# end %>
 <% end %>

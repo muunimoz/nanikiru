@@ -1,20 +1,24 @@
 Rails.application.routes.draw do
  
-  devise_for :admins, controllers: {
-    registrations: 'admin/registrations',
+  devise_for :admin, skip: [:registrations], controllers: {
     sessions: 'admin/sessions'
   }
   
   namespace :admin do
+    get '/' => 'homes#top'
     resources :areas, only: [:index, :create, :edit, :update, :destroy]
     resources :temperatures, only: [:index, :create, :edit, :update, :destroy]
   end
+  
 
   namespace :public do
     
   end  
   
-  devise_for :users
+  devise_for :user, controllers:{
+    registrations: 'public/registrations',
+    sessions: 'public/sessions'
+  }
   
   devise_scope :user do
     post 'user/gest_sign_in', to: 'public/sessions#guest_sign_in'
@@ -28,7 +32,12 @@ Rails.application.routes.draw do
       get :search
     end
   end
-  resources :users, only: [:show, :edit, :update]
+  
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      get :favorites
+    end
+  end
   
   
   root to: "homes#top"
