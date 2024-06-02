@@ -53,10 +53,9 @@ ActiveRecord::Schema.define(version: 2024_05_23_181455) do
   end
 
   create_table "areas", force: :cascade do |t|
-    t.string "area_name", null: false
+    t.string "area_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["area_name"], name: "index_areas_on_area_name"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -86,7 +85,7 @@ ActiveRecord::Schema.define(version: 2024_05_23_181455) do
   create_table "temperatures", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "temperature_name", null: false
+    t.string "temperature_name"
   end
 
   create_table "users", force: :cascade do |t|
