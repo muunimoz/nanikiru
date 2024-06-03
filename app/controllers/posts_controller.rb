@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
-    @user = User.find(params[:id])
+    @user = @post.user
     favorites = Favorite.where(post_id: @post.id).pluck(:user_id)
     @favorite_users = User.find(favorites)
     @comment = Comment.new

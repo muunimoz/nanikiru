@@ -4,8 +4,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :areas, dependent: :destroy
-  has_many :temperatures, dependent: :destroy
+  belongs_to :area
+  belongs_to :temperature
   
   def self.search(keyword, area_name, temperature_name)
     if keyword.present?

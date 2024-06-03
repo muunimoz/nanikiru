@@ -28,6 +28,10 @@
         <p>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </p>
+      <% elsif admin_signed_in? %>
+        <p>
+          <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
+        </p>
       <% else %>
         <p>
           <%= link_to "ナニキルって？", about_path %>

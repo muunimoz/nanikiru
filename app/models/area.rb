@@ -1,3 +1,3 @@
 class Area < ApplicationRecord
-  belongs_to :post, optional: true
+  has_many :posts, dependent: :destroy
 end
