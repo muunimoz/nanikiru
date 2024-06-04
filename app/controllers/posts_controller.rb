@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   end
   
   def search
-    @posts = Post.search(params[:keyword], params[:area_name], params[:temperature_name])
+    @posts = Post.search(params[:keyword], params[:area_id], params[:temperature_id])
   end
   
   def show

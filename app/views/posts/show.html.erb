@@ -2,6 +2,8 @@
 
   <%= image_tag @post.get_image %>
   <p>ユーザーネーム：<%= @post.user.name %></p>
+  <p>地域：<%= @post.area_name %></p>
+  <p>気温：<%= @post.temperature_name %></p>
   <p>説明：<%= @post.text %></p>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
   

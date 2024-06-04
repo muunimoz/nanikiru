@@ -22,6 +22,14 @@ class Post < ApplicationRecord
     @posts
   end
   
+  def area_name
+     Area.find(self.area_id).area_name
+  end
+  
+  def temperature_name
+    Temperature.find(self.temperature_id).temperature_name
+  end
+  
   def get_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
