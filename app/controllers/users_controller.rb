@@ -23,6 +23,19 @@ class UsersController < ApplicationController
     @favorite_posts = Post.find(favorites)
   end
   
+  def check
+    @user = User.find(params[:id])
+  end
+  
+  def withdraw
+    @user = User.find(current_user.id)
+    @user.update(is_active: false)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
+  end
+end
+  
   private
   
   def user_params
@@ -33,7 +46,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     unless user.id == current_user.id
       redirect_to user_path(current_user.id)
-    end
   end
   
 end
+  

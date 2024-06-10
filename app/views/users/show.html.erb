@@ -4,6 +4,7 @@
     <%= image_tag @user.get_profile_image(100,100) %>
     
     <%= link_to "編集", edit_user_path(@user.id) %>
+    
   </div>
   
   <%= link_to "いいね",  favorites_user_path(@user) %>

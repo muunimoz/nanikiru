@@ -1,9 +1,0 @@
-<h1>カテゴリー（地域）編集</h1>
-
-<%= form_with model: @area , url: admin_area_path do |f| %>
-<h4>地域名</h4>
-  <%= f.text_field :area_name %>
-
-  <%= f.submit '更新' %>
-  <%= link_to "BACK", admin_areas_path %>
-<% end %>

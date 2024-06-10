@@ -6,14 +6,10 @@ Rails.application.routes.draw do
   
   namespace :admin do
     get '/' => 'homes#top'
+    get 'dashboards', to: 'dashboards#index'
     resources :areas, only: [:index, :create, :edit, :update, :destroy]
     resources :temperatures, only: [:index, :create, :edit, :update, :destroy]
   end
-  
-
-  namespace :public do
-    
-  end  
   
   devise_for :user, controllers:{
     registrations: 'public/registrations',
@@ -23,7 +19,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     post 'user/gest_sign_in', to: 'public/sessions#guest_sign_in'
   end
-  
   
   resources :posts do
     resource :favorite, only: [:create, :destroy]
@@ -39,6 +34,8 @@ Rails.application.routes.draw do
     end
   end
   
+  get '/users/check' => 'usres#check'
+  patch '/users/withdraw' => 'usres#withdraw'
   
   root to: "homes#top"
   get "about" => "homes#about"
