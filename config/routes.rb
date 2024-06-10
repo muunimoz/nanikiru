@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   
   namespace :admin do
     get '/' => 'homes#top'
-    get 'dashboards', to: 'dashboards#index'
+    get 'users', to: 'users#index'
+    get 'users/:id/edit' => 'users#edit', as: 'edit_user'
     resources :areas, only: [:index, :create, :edit, :update, :destroy]
     resources :temperatures, only: [:index, :create, :edit, :update, :destroy]
   end
@@ -28,14 +29,14 @@ Rails.application.routes.draw do
     end
   end
   
+  get '/users/check' => 'users#check'
+  patch '/users/withdraw' => 'users#withdraw'
   resources :users, only: [:show, :edit, :update] do
     member do
       get :favorites
     end
   end
   
-  get '/users/check' => 'usres#check'
-  patch '/users/withdraw' => 'usres#withdraw'
   
   root to: "homes#top"
   get "about" => "homes#about"

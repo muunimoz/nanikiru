@@ -1,8 +1,0 @@
-<h1>全ユーザー一覧</h1>
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user.id, admin_path %> - <%= user.name %> - <%= user.email %> - <%= user.is_active %> - <%= user.created_at %>
-    </li>
-  <% end %>
-</ul>

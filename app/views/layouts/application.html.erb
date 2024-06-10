@@ -32,6 +32,9 @@
         <p>
           <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
         </p>
+        <p>
+          <%= link_to "管理トップ", admin_path %>
+        </p>
       <% else %>
         <P>
           <%= link_to "TOP", root_path %>
