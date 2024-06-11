@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   }
   
   devise_scope :user do
-    post 'user/gest_sign_in', to: 'public/sessions#guest_sign_in'
+    post 'user/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
   
   resources :posts do

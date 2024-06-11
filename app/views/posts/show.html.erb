@@ -1,6 +1,6 @@
 <h1>詳細</h1>
 
-  <%= image_tag @post.get_image %>
+  <%= image_tag @post.get_image(200, 200) %>
   <p>ユーザーネーム：<%= @post.user.name %></p>
   <p>地域：<%= @post.area_name %></p>
   <p>気温：<%= @post.temperature_name %></p>
