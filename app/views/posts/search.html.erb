@@ -2,7 +2,7 @@
 
 <% @posts.each do |post| %>
     <div>
-      <%= image_tag post.get_image %>
+      <%= image_tag post.get_image(200, 200) %>
       地域：<%= post.area_name %>
       気温<%= post.temperature_name %>
       説明：<%= post.text %>

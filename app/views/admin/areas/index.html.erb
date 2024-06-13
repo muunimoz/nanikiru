@@ -1,4 +1,12 @@
 <h1>カテゴリー（地域）一覧</h1>
+<% if @area.errors.any? %>
+  <%= @area.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @area.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_with model: Area.new, url: admin_areas_path do |f| %>
 <h4>地域名登録</h4>

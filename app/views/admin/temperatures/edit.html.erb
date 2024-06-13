@@ -1,6 +1,14 @@
 <h1>カテゴリー（気温）編集</h1>
+<% if @temperature.errors.any? %>
+  <%= @temperature.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @temperature.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
-<%= form_with model: @temperature, url: admin_temperatures_path do |f| %>
+<%= form_with model: @temperature, url: admin_temperature_path do |f| %>
 <h4>気温名</h4>
   <%= f.text_field :temperature_name %>
   

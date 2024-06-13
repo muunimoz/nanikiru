@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :show, :edit, :update]
-  before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :authenticate_user!, except: [:index, :search]
+  # before_action :is_matching_login_user, only: [:edit, :update]
   
   def new
     @post = Post.new
@@ -9,8 +9,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to posts_path
+    if @post.save
+      redirect_to post_path(@post.id)
+    else
+      render :new
+    end
   end
   
   def index
@@ -42,7 +45,7 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to posts_path
+    redirect_to user_path(user.id)
   end
   
   private
@@ -51,11 +54,11 @@ class PostsController < ApplicationController
     params.require(:post).permit(:image, :text, :area_id, :temperature_id )
   end
   
-  def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id
-      redirect_to posts_path
-    end
-  end
+  # def is_matching_login_user
+  #   user = User.find(params[:id])
+  #   unless user.id == current_user.id
+  #     redirect_to posts_path
+  #   end
+  # end
   
 end

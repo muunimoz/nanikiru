@@ -1,4 +1,12 @@
 <h1>カテゴリー（気温）一覧</h1>
+<% if @temperature.errors.any? %>
+  <%= @temperature.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @temperature.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_with model: Temperature.new, url: admin_temperatures_path do |f| %>
 <h4>気温名登録</h4>
