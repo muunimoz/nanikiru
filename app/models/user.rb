@@ -28,5 +28,6 @@ class User < ApplicationRecord
     super && (is_active == true)
   end
   
+  validates :name, presence: true
 end
 
