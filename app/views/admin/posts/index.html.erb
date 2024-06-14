@@ -3,7 +3,7 @@
   <% @posts.each do |post| %>
   
     <li>
-      <%= link_to post.id, admin_edit_post_path(post.id) %> - <%#= image_tag post.image %> - <%= post.user_id %> - <%= post.text %> -<%= post.updated_at %>
+      <%= link_to post.id, edit_admin_post_path(post.id) %> - <%= image_tag post.get_image(100, 100) %> - <%= post.user_id %> - <%= post.text %> -<%= post.updated_at %>
     </li>
   <% end %>
 </ul>

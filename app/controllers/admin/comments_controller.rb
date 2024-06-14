@@ -2,7 +2,7 @@ class Admin::CommentsController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-      @comments = Comment.all
+    @comments = Comment.all
   end
   
   def edit
@@ -13,6 +13,12 @@ class Admin::CommentsController < ApplicationController
     comment = Comment.find(params[:id])
     comment.update(comment_params)
       redirect_to admin_comments_path
+  end
+  
+  def destroy
+    comment = Comment.find(params[:id])
+    comment.destroy
+    redirect_to admin_comments_path
   end
   
   private

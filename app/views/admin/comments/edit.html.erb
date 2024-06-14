@@ -1,0 +1,9 @@
+<h1>コメント編集</h1>
+<%= form_with model: @comment, url:admin_comment_path do |f| %>
+　<h4>コメント</h4>
+  <%= f.text_field :comment %>
+  
+  <%= f.submit '更新' %>
+  <%= link_to "削除", admin_comment_path(@comment.id), method: :delete %>
+  
+<% end %>
