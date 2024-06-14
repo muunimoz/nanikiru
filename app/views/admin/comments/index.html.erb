@@ -1,0 +1,8 @@
+<h1>コメント一覧</h1>
+<ul>
+  <% @comments.each do |comment| %>
+    <li>
+      <%#= link_to comment.id, admin_edit_comment_path(comment.id) %> - <%= comment.user_id %> - <%= comment.post_id %> - <%= comment.comment %> - <%= comment.created_at %>
+    </li>
+  <% end %>
+</ul>

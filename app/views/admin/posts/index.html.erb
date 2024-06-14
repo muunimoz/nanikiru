@@ -1,0 +1,9 @@
+<h1>全投稿一覧</h1>
+<ul>
+  <% @posts.each do |post| %>
+  
+    <li>
+      <%= link_to post.id, admin_edit_post_path(post.id) %> - <%#= image_tag post.image %> - <%= post.user_id %> - <%= post.text %> -<%= post.updated_at %>
+    </li>
+  <% end %>
+</ul>
