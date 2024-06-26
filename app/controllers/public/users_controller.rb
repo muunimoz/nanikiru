@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
+    @posts = @user.posts.page(params[:page])
   end
 
   def edit
@@ -27,17 +27,16 @@ class Public::UsersController < ApplicationController
   end
   
   def check
-    @user = current_user.id
+    @user = current_user
   end
   
   def withdraw
-    @user = User.find(current_user.id)
+    @user = current_user
     @user.update(is_active: false)
     reset_session
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to root_path
   end
-end
   
   private
   
@@ -49,7 +48,6 @@ end
     user = User.find(params[:id])
     unless user.id == current_user.id
       redirect_to user_path(current_user.id)
+    end
   end
-  
 end
-  

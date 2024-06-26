@@ -5,50 +5,62 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/76f411fe92.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-      <% if user_signed_in? %>
-        <p>
-          <%= link_to "ナニキル？って", about_path %>
-        </p>
-        <p>
-          <%= link_to "Myページ", user_path(current_user.id) %>
-        </p>
-        <p>
-          <%= link_to "ALL", posts_path %>
-        </p>
-        <p>
-          <%#= link_to "検索", _path %>
-        </p>
-        <p>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </p>
-      <% elsif admin_signed_in? %>
-        <p>
-          <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
-        </p>
-        <p>
-          <%= link_to "管理トップ", admin_path %>
-        </p>
-      <% else %>
-        <P>
-          <%= link_to "TOP", root_path %>
-        </p>
-        <p>
-          <%= link_to "ナニキルって？", about_path %>
-        </p>
-        <p>
-          <%=link_to "新規登録",  new_user_registration_path %>
-        </p>
-        <p>
-          <%=link_to "ログイン",  new_user_session_path %>
-        </p>
-      <% end %>
+      <!--<div class='fixed-top'>-->
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#72c6ef;">
+          <div class="container-fluid">
+            <li class="navbar-brand">
+              <%= link_to "ナニキル", about_path, class: 'text-light' %>
+            </li>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <div class="navbar-nav ms-auto">
+                  <li class="nav-link text-light">
+                    <%= link_to "Myページ", user_path(current_user.id) %>
+                  </li>
+                  <li class="nav-link text-light">
+                    <%= link_to "ALL", posts_path %>
+                  </li>
+                  <li class="nav-link text-light">
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                  </li>
+                </div>  
+              <% elsif admin_signed_in? %>
+                <div class="navbar-nav ms-auto">
+                  <li class="nav-link text-light">
+                    <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
+                  </li>
+                  <li class="nav-link text-light">
+                    <%= link_to "管理トップ", admin_path %>
+                  </li>
+                </div>
+              <% else %>
+                <div class="navbar-nav ms-auto">
+                  <li class="nav-link text-light">
+                    <%= link_to "TOP", root_path %>
+                  </li>
+                  <li class="nav-link text-light">
+                    <%=link_to "新規登録",  new_user_registration_path %>
+                  </li>
+                  <li class="nav-link text-light">
+                    <%=link_to "ログイン",  new_user_session_path %>
+                  </li>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <!--</div>-->
+      </nav>
     </header>
     <%= yield %>
   </body>

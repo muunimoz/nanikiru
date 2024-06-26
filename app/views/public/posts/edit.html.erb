@@ -1,11 +1,22 @@
-<h1>投稿編集</h1>
-<%= form_with model: @post do |f| %>
-  <%= image_tag @post.get_image(200, 200) %>
-　<h4>説明</h4>
-  <%= f.text_field :text %>
-  
-  <%= f.submit '更新' %>
-  <%= link_to "削除", post_path, method: :delete %>
-  
-<% end %>
+<div class="container-fluid">
+  <div class="row py-5 mx-auto mt-4 shadow-lg w-50 d-flex align-items-center justify-content-center">
+    <div class="col-10">
+      <h2>投稿編集</h2>
+      <div class="row d-flex align-items-center justify-content-center">
+        <%= form_with model: @post do |f| %>
+          <%= image_tag @post.get_image(400, 400) %>
+      　   <h4>説明</h4>
+          <%= f.text_field :text %>
+          <%= f.submit '更新' %>
+        </div>
+        <div class="row align-items-center justify-content-end">
+          <%= link_to "削除", post_path, method: :delete, class: "btn btn-danger" %>
+        </div>
+        <% end %>
+      <div class="row d-flex align-items-center justify-content-end">
+        <%= link_to "BACK", post_path(@post.id) %>
+      </div>
+    </div>
+  </div>
+</div>
 

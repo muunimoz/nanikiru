@@ -1,7 +1,29 @@
-<h1>ナニキル？</h1>
-
-<p><%= link_to "ゲストログイン", user_guest_sign_in_path ,method: :post %></p>
-<p><%= link_to "新規登録", new_user_registration_path %></p>
-<p><%= link_to "ログイン", new_user_session_path %></p>
-
-<p><%= link_to "管理者ログイン", new_admin_session_path %></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+      <h1>ナニキル？</h1>
+      <div class="btn-wrapper col-10 mx-auto">
+        <div class="row">
+          <li class="btn btn-outline-dark btn-sm btn-block mb-3 sign_in">
+            <%= link_to "ゲストログイン", user_guest_sign_in_path ,method: :post, class: 'text-dark' %>
+          </li>
+        </div>
+        <div class="row">
+          <li class="btn btn-outline-dark btn-sm btn-block mb-3 sign_in">
+            <%= link_to "新規登録", new_user_registration_path, class: 'text-dark' %>
+          </li>
+        </div>
+        <div class="row">
+          <li class="btn btn-outline-dark btn-sm btn-block mb-3 sign_in">
+            <%= link_to "ログイン", new_user_session_path, class: 'text-dark' %>
+          </li>
+        </div>
+        <div class="row">
+          <li class="btn btn-outline-dark btn-sm btn-block mb-3 sign_in">
+            <%= link_to "管理者ログイン", new_admin_session_path, class: 'text-dark' %>
+          </li>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -27,13 +27,14 @@ Rails.application.routes.draw do
         get :search
       end
     end
+    get '/users/check' => 'users#check'
+    patch '/users/withdraw' => 'users#withdraw'
     resources :users, only: [:show, :edit, :update] do
       member do
         get :favorites
       end
     end
-    get '/users/check' => 'users#check'
-    patch '/users/withdraw' => 'users#withdraw'
+
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
