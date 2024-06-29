@@ -79,7 +79,7 @@
       <div class="row d-flex align-items-center justify-content-center">
         <%= form_with model: [@post, @comment] do |f| %>
           <%= f.text_area :comment, placeholder: "コメントをここに" %>
-          <p><%= f.submit "送信" %></p>
+          <p><%= f.submit "送信", class: "btn btn-info"%></p>
         <% end %>
       </div>
       <div class="row d-flex align-items-center justify-content-end">

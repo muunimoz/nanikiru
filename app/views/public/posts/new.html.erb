@@ -13,6 +13,7 @@
         <% end %>
       </div>
       <%= form_with model: @post, url: posts_path do |f| %>
+      <form>
       <div class="row d-flex align-items-center justify-content-center">
         <p>画像:</p>
         <%= f.file_field :image, accept: "image/*" %>
@@ -30,7 +31,7 @@
         <%= f.text_field :text %>
       </div>
       <div class="row d-flex align-items-center justify-content-center">
-        <%= f.submit '投稿' %>
+        <%= f.submit '投稿', class: "btn btn-info" %>
       </div>
       <% end %>
       <div class="row d-flex align-items-center justify-content-end">
@@ -39,8 +40,3 @@
     </div>
   </div>
 </div>
-
-
-  
-
-

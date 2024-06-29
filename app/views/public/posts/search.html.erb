@@ -1,10 +1,11 @@
 <div class="container-fluid">
   <div class="row py-5 mx-auto mt-4 shadow-lg w-50 d-flex align-items-center justify-content-center">
     <div class="col-10">
-      <h1>検索画面</h1>
+      <h2>検索画面</h2>
       <% @posts.each do |post| %>
         <div>
           <%= image_tag post.get_image(200, 200) %>
+          <%#= link_to image_tag(post.get_image(300,300)), post_path(post.id) %>
           地域：<%= post.area_name %>
           気温<%= post.temperature_name %>
           説明：<%= post.text %>
@@ -14,4 +15,5 @@
     </div>
   </div>
 </div>
+
 
