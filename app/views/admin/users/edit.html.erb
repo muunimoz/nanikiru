@@ -1,7 +1,20 @@
-<%= form_with model: @user do |f| %>
-  <label for="inputName">Name</label>
-  <%= f.text_field :name, autofocus: true, id:"inputName" %><br>
-  <label for="inputProfileImage">ProfileImage</label>
-  <%= image_tag @user.get_profile_image(100, 100) %>
-  <%= f.submit "変更を保存" %>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+      <h3 class="mt-4">ユーザー編集</h3>
+    </div>
+  </div>
+  <div class="row py-5 mx-auto mt-4 pr-4 shadow-lg w-50 d-flex align-items-center justify-content-center ">
+    <div class="row d-flex align-items-center justify-content-center">
+    <%= form_with model: @user do |f| %>
+      <label for="inputName">Name</label>
+        <%= f.text_field :name, autofocus: true, id:"inputName" %><br>
+      <label for="inputProfileImage">ProfileImage</label>
+      <%= image_tag @user.get_profile_image(100, 100) %>
+      <%= f.submit "更新", class: "btn btn-info" %>
+    <% end %>
+    <div class="col-12 d-flex align-items-center justify-content-end">
+      <%= link_to "BACK", admin_users_path %>
+    </div>
+  </div>
+</div>

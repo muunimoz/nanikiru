@@ -1,8 +1,36 @@
-<h1>コメント一覧</h1>
-<ul>
-  <% @comments.each do |comment| %>
-    <li>
-      <%= link_to comment.id, edit_admin_comment_path(comment.id) %> - <%= comment.user_id %> - <%= comment.post_id %> - <%= comment.comment %> - <%= comment.created_at %>
-    </li>
-  <% end %>
-</ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+      <h3 class="mt-4">コメント一覧</h3>
+    </div>
+  </div>
+  <div class="row py-5 mx-auto mt-4 pr-4 shadow-lg w-50 d-flex align-items-center justify-content-center ">
+    <div class="row d-flex align-items-center justify-content-center">
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th>コメントid</th>
+            <th>ユーザーid</th>
+            <th>投稿id</th>
+            <th>コメント</th>
+            <th>投稿日時</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td><%= link_to comment.id, edit_admin_comment_path(comment.id) %></td>
+              <td><%= comment.user_id %></td>
+              <td><%= comment.post_id %></td>
+              <td><%= comment.comment %></td>
+              <td><%= comment.created_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="col-12 d-flex align-items-center justify-content-end">
+        <%= link_to "BACK", admin_path %>
+      </div>
+    </div>
+  </div>
+</div>

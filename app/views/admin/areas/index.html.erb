@@ -1,25 +1,40 @@
-<h1>カテゴリー（地域）一覧</h1>
-<% if @area.errors.any? %>
-  <%= @area.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @area.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= form_with model: Area.new, url: admin_areas_path do |f| %>
-<h4>地域名登録</h4>
-  <%= f.text_field :area_name %>
-  
-  <%= f.submit '登録' %>
-  
-<% end %>
-
-<% @areas.each do |area| %>
-  <p>地域名</p>
-  <%= area.area_name %>
-  <%= link_to "編集", edit_admin_area_path(area.id) %>
-  <%= link_to "削除", admin_area_path(area.id), method: :delete %>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+      <h3 class="mt-4">カテゴリー（地域）一覧</h3>
+      <%= form_with model: Area.new, url: admin_areas_path do |f| %>
+        <h5 class="mt-4">地域名登録</h5>
+        <%= f.text_field :area_name %>
+        <%= f.submit '登録', class: "btn btn-info" %>
+      <% end %>
+      <% if @area.errors.any? %>
+        <%= @area.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @area.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+  <div class="row py-5 mx-auto mt-4 pr-4 shadow-lg w-50 d-flex align-items-center justify-content-center ">
+    <div class="row d-flex align-items-center justify-content-center">
+      <table class="table table-hover table-inverse">
+        <tbody>
+          <% @areas.each do |area| %>
+            <tr>
+              <td>地域名</td>
+              <td><%= area.area_name %></td>
+              <td><%= link_to "編集", edit_admin_area_path(area.id), class: "btn btn-primary" %></td>
+              <td><%= link_to "削除", admin_area_path(area.id), method: :delete, class: "btn btn-danger" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="col-12 d-flex align-items-center justify-content-end">
+        <%= link_to "BACK", admin_path %>
+      </div>
+    </div>
+  </div>
+</div>
   
