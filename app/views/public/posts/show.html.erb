@@ -1,7 +1,6 @@
 <div class="container-fluid">
-  <div class="row py-5 mx-auto mt-4 shadow-lg w-50 d-flex align-items-center justify-content-center">
+  <div class="row py-5 mx-auto mt-5 shadow-lg w-50 d-flex align-items-center justify-content-center">
     <div class="col-10">
-      <h2>詳細</h2>
       <%= link_to user_path(@post.user.id) do %>
         <div class="row d-flex align-items-center justify-content-center">
           <div class="col-2 d-flex justify-content-end px-0">
@@ -34,7 +33,7 @@
       <div class="row d-flex align-items-center justify-content-center">
         <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
       </div>
-      
+
       <div class="row d-flex align-items-center justify-content-center">
         <% if @post.favorited_by?(current_user) %>
           <p>
@@ -55,7 +54,7 @@
         </div>
         <% end %>
       </div>
-      
+
       <div class="row d-flex align-items-center justify-content-start">
         <p>コメント件数：<%= @post.comments.count %></p>
       </div>
@@ -75,11 +74,11 @@
           </tbody>
         </table>
       </div>
-      
+
       <div class="row d-flex align-items-center justify-content-center">
         <%= form_with model: [@post, @comment] do |f| %>
           <%= f.text_area :comment, placeholder: "コメントをここに" %>
-          <p><%= f.submit "送信", class: "btn btn-info"%></p>
+          <p class="d-flex justify-content-center mt-3"><%= f.submit "送信", class: "btn btn-info"%></p>
         <% end %>
       </div>
       <div class="row d-flex align-items-center justify-content-end">

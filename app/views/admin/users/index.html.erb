@@ -5,31 +5,35 @@
     </div>
   </div>
   <div class="row py-5 mx-auto mt-4 pr-4 shadow-lg w-50 d-flex align-items-center justify-content-center ">
-    <div class="row d-flex align-items-center justify-content-center">
-      <table class="table table-hover table-inverse">
-        <thead>
-          <tr>
-            <th>ユーザーid</th>
-            <th>プロフィール画像</th>
-            <th>ユーザーネーム</th>
-            <th>メールアドレス</th>
-            <th>状態</th>
-            <th>登録日時</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <td><%= link_to user.id, edit_admin_user_path(user.id) %></td>
-              <td><%= image_tag user.get_profile_image(100, 100) %></td>
-              <td><%= user.name %></td>
-              <td><%= user.email %></td>
-              <td><%= user.is_active %></td>
-              <td><%= user.created_at %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class="col-11">
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-12 d-flex justify-content-end px-0">
+          <table class="table table-hover table-inverse">
+            <thead>
+              <tr>
+                <th>ユーザーid</th>
+                <th>プロフィール画像</th>
+                <th>ユーザーネーム</th>
+                <th>メールアドレス</th>
+                <th>状態</th>
+                <th>登録日時</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= link_to user.id, edit_admin_user_path(user.id) %></td>
+                  <td><%= image_tag user.get_profile_image(100, 100) %></td>
+                  <td><%= user.name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.is_active %></td>
+                  <td><%= user.created_at %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="col-12 d-flex align-items-center justify-content-end">
         <%= link_to "BACK", admin_path %>
       </div>

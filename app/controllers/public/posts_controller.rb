@@ -22,6 +22,7 @@ class Public::PostsController < ApplicationController
   
   def search
     @posts = Post.search(params[:keyword], params[:area_id], params[:temperature_id])
+    @posts = Post.page(params[:page])
   end
   
   def show

@@ -1,9 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
-      <h2>ALL</h2>
+      <h3 class="mt-4">ALL</h3>
       <%=link_to "新規投稿", new_post_path, class: "btn btn-info" %>
-
       <%= form_with(url: search_posts_path, local: true, method: :get ) do |f| %>
         <%= f.text_field :keyword %>
         <%= f.select :area_name, options_from_collection_for_select( Area.all, :area_name, :area_name), {prompt: "選択してください"} %>
@@ -12,8 +11,6 @@
       <% end %>
     </div>
   </div>
-
-
   <div class="row py-5 mx-auto mt-4 pr-4 shadow-lg w-50 d-flex align-items-center justify-content-start ">
     <% @posts.each do |post| %>
       <div class="col-md-4 mt-2">
@@ -31,7 +28,7 @@
       </div>
     <% end %>
     <div class="col-12 d-flex align-items-center justify-content-center">
-    <%= paginate @posts %>
+      <%= paginate @posts %>
     </div>
   </div>
 </div>

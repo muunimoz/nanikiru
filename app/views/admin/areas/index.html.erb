@@ -18,19 +18,23 @@
     </div>
   </div>
   <div class="row py-5 mx-auto mt-4 pr-4 shadow-lg w-50 d-flex align-items-center justify-content-center ">
-    <div class="row d-flex align-items-center justify-content-center">
-      <table class="table table-hover table-inverse">
-        <tbody>
-          <% @areas.each do |area| %>
-            <tr>
-              <td>地域名</td>
-              <td><%= area.area_name %></td>
-              <td><%= link_to "編集", edit_admin_area_path(area.id), class: "btn btn-primary" %></td>
-              <td><%= link_to "削除", admin_area_path(area.id), method: :delete, class: "btn btn-danger" %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class="col-10">
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-5 d-flex justify-content-end px-0">
+          <table class="table table-hover table-inverse">
+            <tbody>
+              <% @areas.each do |area| %>
+                <tr>
+                  <td>地域名</td>
+                  <td><%= area.area_name %></td>
+                  <td><%= link_to "編集", edit_admin_area_path(area.id), class: "btn btn-primary" %></td>
+                  <td><%= link_to "削除", admin_area_path(area.id), method: :delete, class: "btn btn-danger" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="col-12 d-flex align-items-center justify-content-end">
         <%= link_to "BACK", admin_path %>
       </div>
