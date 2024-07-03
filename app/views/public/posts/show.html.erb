@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <div class="row py-5 mx-auto mt-5 shadow-lg w-50 d-flex align-items-center justify-content-center">
-    <div class="col-10">
+  <div class="row align-content-center d-flex justify-content-center mt-5">
+    <div class="col-12 col-md-6 shadow-lg p-5">
       <%= link_to user_path(@post.user.id) do %>
         <div class="row d-flex align-items-center justify-content-center">
-          <div class="col-2 d-flex justify-content-end px-0">
+          <div class="col-5 d-flex justify-content-end">
             <%= image_tag @post.user.get_profile_image(80,80), class: "rounded-circle"; %>
           </div>
           <div class="col-6 mt-4">
@@ -11,77 +11,81 @@
           </div>
         </div>
       <% end %>
-      <div class="row d-flex align-items-center justify-content-center">
-        <%= image_tag @post.get_image(400, 400) %>
-      </div>
-      <div class="row d-flex align-items-center justify-content-end">
-        <% if @post.user == current_user %>
-          <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-primary" %>
-        <% end %>
-      </div>
-      <div class="row d-flex align-items-center justify-content-center">
-        <div class="col-2">
+      <div class="row d-flex justify-content-center">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+        <%= image_tag @post.get_image(300, 300) %>
+        </div>
+        <div class="col-9 d-flex justify-content-end">
+          <% if @post.user == current_user %>
+            <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-primary" %>
+          <% end %>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
           <p>地域：<%= @post.area_name %></p>
         </div>
-        <div class="col-2">
+        <div class="col-12 d-flex justify-content-center">
           <p>気温：<%= @post.temperature_name %></p>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <p>説明：<%= @post.text %></p>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
         </div>
       </div>
       <div class="row d-flex align-items-center justify-content-center">
-        <p>説明：<%= @post.text %></p>
-      </div>
-      <div class="row d-flex align-items-center justify-content-center">
-        <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-      </div>
-
-      <div class="row d-flex align-items-center justify-content-center">
         <% if @post.favorited_by?(current_user) %>
-          <p>
+          <div class="col-2 d-flex justify-content-end">
             <%= link_to post_favorite_path(@post), method: :delete do %>
               ♥<%= @post.favorites.count %> いいね
             <% end %>
-          </p>
-        <% else %>
-          <p>
+          </div>
+          <% else %>
+          <div class="col-2 d-flex justify-content-end">
             <%= link_to post_favorite_path(@post), method: :post do %>
               ♡<%= @post.favorites.count %> いいね
             <% end %>
-          </p>
+          </div>
         <% end %>
-         <% @favorite_users.each do |user| %>
-        <div>
-          <%= link_to image_tag(@user.get_profile_image(50,50)), user_path(user.id) %>
+        <% @favorite_users.each do |user| %>
+          <%= link_to image_tag(user.get_profile_image(50,50)), user_path(user.id) %>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-start">
+          コメント件数：<%= @post.comments.count %>
         </div>
-        <% end %>
       </div>
-
-      <div class="row d-flex align-items-center justify-content-start">
-        <p>コメント件数：<%= @post.comments.count %></p>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-start">
+          <table class="table table-borderless">
+            <tbody>
+              <% @post.comments.each do |comments| %>
+                <tr>
+                  <td><%= image_tag comments.user.get_profile_image(50,50) %></td>
+                  <td><%= comments.user.name %></td>
+                  <td><%= comments.created_at.strftime('%Y/%m/%d') %></td>
+                  <td><%= comments.comment %></td>
+                  <% if comments.user == current_user %>
+                    <td><%= link_to "削除", post_comment_path(comments.post, comments), method: :delete, class: "btn btn-danger" %></td>
+                  <% end %>
+                </tr>
+                <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="row d-flex align-items-center justify-content-center">
-        <table class="table table-borderless">
-          <tbody>
-            <% @post.comments.each do |comments| %>
-              <tr>
-              <td><%= image_tag comments.user.get_profile_image(50,50) %></td>
-              <td><%= comments.user.name %></td>
-              <td><%= comments.created_at.strftime('%Y/%m/%d') %></td>
-              <td><%= comments.comment %></td>
-            <% if comments.user == current_user %>
-              <td><%= link_to "削除", post_comment_path(comments.post, comments), method: :delete, class: "btn btn-danger" %></td>
-            <% end %>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="row d-flex align-items-center justify-content-center">
+      <div class="row d-flex justify-content-center">
         <%= form_with model: [@post, @comment] do |f| %>
-          <%= f.text_area :comment, placeholder: "コメントをここに" %>
-          <p class="d-flex justify-content-center mt-3"><%= f.submit "送信", class: "btn btn-info"%></p>
+          <div class="col-12 d-flex justify-content-center">
+            <%= f.text_area :comment, placeholder: "コメントをここに" %>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <p class="mt-3"><%= f.submit "送信", class: "btn btn-info"%></p>
+          </div>
         <% end %>
       </div>
-      <div class="row d-flex align-items-center justify-content-end">
+      <div class="row d-flex align-items-center justify-content-end mb-5">
         <%= link_to "BACK", posts_path %>
       </div>
     </div>

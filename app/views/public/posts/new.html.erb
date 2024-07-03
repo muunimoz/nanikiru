@@ -1,13 +1,13 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row mb-3">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
       <h3 class="mt-4">新規投稿</h3>
     </div>
   </div>
-  <div class="row py-5 mx-auto mt-4 shadow-lg w-50 d-flex align-items-center justify-content-center">
-    <div class="col-10">
+  <div class="row align-content-center d-flex justify-content-center">
+    <div class="col-12 col-md-6 shadow-lg p-5">
       <div class="row d-flex align-items-center justify-content-center">
-        <div class="col-2 d-flex justify-content-end px-0">
+        <div class="align-content-center col-12 d-flex justify-content-center mt-4">
           <% if @post.errors.any? %>
             <%= @post.errors.count %>件のエラーが発生しました
             <ul>
@@ -18,20 +18,28 @@
           <% end %>
         </div>
         <%= form_with model: @post, url: posts_path do |f| %>
-          <div class="col-9 mt-4">
+          <div class="col-12 mt-4 d-flex justify-content-start">
             <h4 class="mt-3">画像</h4>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
             <%= f.file_field :image, accept: "image/*" %>
           </div>
-          <div class="col-9 mt-4">
+          <div class="col-12 mt-4 d-flex justify-content-start">
             <h4 class="mt-3">地域</h4>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
             <%= f.select :area_id, options_from_collection_for_select(Area.all, :id, :area_name), { prompt: "選択してください" } %>
           </div>
-          <div class="col-9 mt-4">
+          <div class="col-12 mt-4 d-flex justify-content-start">
             <h4 class="mt-3">気温</h4>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
             <%= f.select :temperature_id, options_from_collection_for_select(Temperature.all, :id, :temperature_name), { prompt: "選択してください" } %>
           </div>
-          <div class="col-9 mt-4">
+          <div class="col-12 mt-4 d-flex justify-content-start">
             <h4 class="mt-3">説明</h4>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
             <%= f.text_field :text %>
           </div>
           <div class="col-9 mt-4 d-flex align-items-center justify-content-center">

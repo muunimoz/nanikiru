@@ -1,34 +1,36 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row mb-3">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
       <h3 class="mt-4">コメント一覧</h3>
     </div>
   </div>
-  <div class="col-10">
-    <div class="row d-flex align-items-center justify-content-center mt-3">
-      <div class="col-5 d-flex justify-content-end px-0">
-        <table class="table table-hover table-inverse">
-          <thead>
-            <tr>
-              <th>コメントid</th>
-              <th>ユーザーid</th>
-              <th>投稿id</th>
-              <th>コメント</th>
-              <th>投稿日時</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @comments.each do |comment| %>
+   <div class="row align-content-center d-flex justify-content-center">
+    <div class="col-12 col-md-6 shadow-lg p-5">
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-10 d-flex justify-content-end px-0">
+          <table class="table table-hover table-inverse">
+            <thead>
               <tr>
-                <td><%= link_to comment.id, edit_admin_comment_path(comment.id) %></td>
-                <td><%= comment.user_id %></td>
-                <td><%= comment.post_id %></td>
-                <td><%= comment.comment %></td>
-                <td><%= comment.created_at %></td>
+                <th>コメントid</th>
+                <th>ユーザーid</th>
+                <th>投稿id</th>
+                <th>コメント</th>
+                <th>投稿日時</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <% @comments.each do |comment| %>
+                <tr>
+                  <td><%= link_to comment.id, edit_admin_comment_path(comment.id) %></td>
+                  <td><%= comment.user_id %></td>
+                  <td><%= comment.post_id %></td>
+                  <td><%= comment.comment %></td>
+                  <td><%= comment.created_at %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="col-12 d-flex align-items-center justify-content-end">
         <%= link_to "BACK", admin_path %>
