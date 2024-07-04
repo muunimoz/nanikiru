@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid pb-5">
   <div class="row mb-3">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
       <% if @user == current_user %>
@@ -25,7 +25,9 @@
           <% if @user.email == 'guest@example.com' %>
           <% else %>
             <div class="col-10 d-flex justify-content-end mt-4">
-              <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-primary" %>
+              <% if @user == current_user %>
+                <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-primary" %>
+              <% end %>
             </div>
           <% end %>
         </div>

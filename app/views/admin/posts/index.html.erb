@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid pb-5">
   <div class="row mb-3">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
       <h3 class="mt-4">投稿一覧</h3>
@@ -11,9 +11,8 @@
           <table class="table table-hover table-inverse">
             <thead>
               <tr>
-                <th>投稿id</th>
                 <th>投稿画像</th>
-                <th>ユーザーid</th>
+                <th>ユーザーネーム</th>
                 <th>投稿文</th>
                 <th>最終更新日時</th>
               </tr>
@@ -21,11 +20,10 @@
             <tbody>
               <% @posts.each do |post| %>
                 <tr>
-                  <td><%= link_to post.id, edit_admin_post_path(post.id) %></td>
-                  <td><%= image_tag post.get_image(100, 100) %></td>
-                  <td><%= post.user_id %></td>
+                  <td><%= link_to image_tag(post.get_image(100, 100)), edit_admin_post_path(post.id) %></td>
+                  <td><%= post.user.name %></td>
                   <td><%= post.text %></td>
-                  <td><%= post.updated_at %></td>
+                  <td><%= post.updated_at.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d/ %H:%M:%S') %></td>
                 </tr>
               <% end %>
             </tbody>

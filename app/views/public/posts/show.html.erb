@@ -1,8 +1,8 @@
-<div class="container-fluid">
+<div class="container-fluid pb-5">
   <div class="row align-content-center d-flex justify-content-center mt-5">
     <div class="col-12 col-md-6 shadow-lg p-5">
       <%= link_to user_path(@post.user.id) do %>
-        <div class="row d-flex align-items-center justify-content-center">
+        <div class="row d-flex align-items-center justify-content-center mb-3">
           <div class="col-5 d-flex justify-content-end">
             <%= image_tag @post.user.get_profile_image(80,80), class: "rounded-circle"; %>
           </div>
@@ -20,7 +20,7 @@
             <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-primary" %>
           <% end %>
         </div>
-        <div class="col-12 d-flex justify-content-center">
+        <div class="col-12 d-flex justify-content-center mt-3">
           <p>地域：<%= @post.area_name %></p>
         </div>
         <div class="col-12 d-flex justify-content-center">
@@ -30,12 +30,12 @@
           <p>説明：<%= @post.text %></p>
         </div>
         <div class="col-12 d-flex justify-content-center">
-          <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+          <p>投稿日：<%= @post.created_at.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d') %></p>
         </div>
       </div>
       <div class="row d-flex align-items-center justify-content-center">
         <% if @post.favorited_by?(current_user) %>
-          <div class="col-2 d-flex justify-content-end">
+          <div class="col-2 d-flex justify-content-center">
             <%= link_to post_favorite_path(@post), method: :delete do %>
               ♥<%= @post.favorites.count %> いいね
             <% end %>
@@ -62,9 +62,9 @@
             <tbody>
               <% @post.comments.each do |comments| %>
                 <tr>
-                  <td><%= image_tag comments.user.get_profile_image(50,50) %></td>
+                  <td><%= link_to image_tag(comments.user.get_profile_image(50,50)), user_path(comments.user.id) %></td>
                   <td><%= comments.user.name %></td>
-                  <td><%= comments.created_at.strftime('%Y/%m/%d') %></td>
+                  <td><%= comments.created_at.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d/ %H:%M:%S') %></td>
                   <td><%= comments.comment %></td>
                   <% if comments.user == current_user %>
                     <td><%= link_to "削除", post_comment_path(comments.post, comments), method: :delete, class: "btn btn-danger" %></td>

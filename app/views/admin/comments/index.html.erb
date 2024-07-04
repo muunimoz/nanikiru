@@ -11,9 +11,8 @@
           <table class="table table-hover table-inverse">
             <thead>
               <tr>
-                <th>コメントid</th>
-                <th>ユーザーid</th>
-                <th>投稿id</th>
+                <th>ユーザーネーム</th>
+                <th>投稿画像</th>
                 <th>コメント</th>
                 <th>投稿日時</th>
               </tr>
@@ -21,11 +20,10 @@
             <tbody>
               <% @comments.each do |comment| %>
                 <tr>
-                  <td><%= link_to comment.id, edit_admin_comment_path(comment.id) %></td>
-                  <td><%= comment.user_id %></td>
-                  <td><%= comment.post_id %></td>
-                  <td><%= comment.comment %></td>
-                  <td><%= comment.created_at %></td>
+                  <td><%= comment.user.name %></td>
+                  <td><%= image_tag comment.post.get_image(100, 100) %></td>
+                  <td><%= link_to comment.comment, edit_admin_comment_path(comment.id) %></td>
+                  <td><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d/ %H:%M:%S') %></td>
                 </tr>
               <% end %>
             </tbody>
