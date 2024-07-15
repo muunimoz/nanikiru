@@ -23,7 +23,7 @@
                   <td><%= link_to image_tag(post.get_image(100, 100)), edit_admin_post_path(post.id) %></td>
                   <td><%= post.user.name %></td>
                   <td><%= post.text %></td>
-                  <td><%= post.updated_at.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d/ %H:%M:%S') %></td>
+                  <td><%= post.updated_at.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d %H:%M:%S') %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -31,7 +31,9 @@
         </div>
       </div>
       <div class="col-12 d-flex align-items-center justify-content-end">
-        <%= link_to "BACK", admin_path %>
+        <%= link_to admin_path do %>
+          <i class="fa-regular fa-circle-left fa-2x"></i>
+        <% end %>
       </div>
       <div class="col-12 d-flex align-items-center justify-content-center mt-5">
         <%= paginate @posts %>

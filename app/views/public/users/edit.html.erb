@@ -36,8 +36,10 @@
           </div>
         <% end %>
       </div>
-      <div class="col-12 d-flex align-items-center justify-content-end mb-5">
-        <%= link_to "BACK", user_path(current_user.id) %>
+      <div class="col-12 d-flex align-items-center justify-content-end my-5">
+        <%= link_to user_path(current_user.id) do %>
+          <i class="fa-regular fa-circle-left fa-2x"></i>
+        <% end %>
       </div>
     </div>
   </div>

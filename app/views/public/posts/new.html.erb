@@ -17,7 +17,7 @@
             </ul>
           <% end %>
         </div>
-        <%= form_with model: @post, url: posts_path do |f| %>
+        <%= form_with model: @post, url: posts_path, local:true do |f| %>
           <div class="col-12 mt-4 d-flex justify-content-start">
             <h4 class="mt-3">画像</h4>
           </div>
@@ -42,13 +42,16 @@
           <div class="col-12 d-flex justify-content-center">
             <%= f.text_field :text %>
           </div>
-          <div class="col-9 mt-4 d-flex align-items-center justify-content-center">
-            <%= f.submit '投稿', class: "btn btn-info" %>
+          <div class="col-12 mt-4 d-flex justify-content-center">
+            <%= f.submit '投稿', :name => 'public', class: "btn btn-info mr-4" %>
+            <%= f.submit '下書きに保存', :name => 'draft', class: "btn btn-secondary" %>
           </div>
         <% end %>
       </div>
-      <div class="col-12 d-flex align-items-center justify-content-end">
-      <%= link_to "BACK", posts_path %>
+      <div class="col-12 d-flex align-items-center justify-content-end my-5">
+        <%= link_to posts_path do %>
+          <i class="fa-regular fa-circle-left fa-2x"></i>
+        <% end %>
       </div>
     </div>
   </div>

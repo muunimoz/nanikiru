@@ -5,11 +5,11 @@
     </div>
   </div>
   <div class="row align-content-center d-flex justify-content-center">
-    <div class="col-12 col-md-6 shadow-lg p-5">
-      <div class="row d-flex align-items-center justify-content-center">
+    <div class="col-12 col-md-6 shadow-lg p-5 mb-5">
+      <div class="row d-flex align-items-center justify-content-start">
         <% @posts.each do |post| %>
           <div class="col-md-4 mt-2">
-            <%= link_to image_tag(post.get_image(300,300), class:"w-100"), post_path(post.id) %>
+            <%= link_to image_tag(post.get_cut_image(256,170), class:"w-100"), post_path(post.id) %>
             <%= link_to user_path(post.user.id) do %>
               <div class="row">
                 <div class="col-2">
@@ -25,6 +25,11 @@
       </div>
       <div class="col-12 d-flex align-items-center justify-content-center mt-5">
         <%= paginate @posts %>
+      </div>
+      <div class="col-12 d-flex align-items-center justify-content-end my-5">
+        <%= link_to posts_path do %>
+          <i class="fa-regular fa-circle-left fa-2x"></i>
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid pb-5">
   <div class="row mb-3">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
       <h3 class="mt-4">投稿編集</h3>
@@ -7,24 +7,70 @@
   <div class="row align-content-center d-flex justify-content-center">
     <div class="col-12 col-md-6 shadow-lg p-5">
       <div class="row d-flex align-items-center justify-content-center">
-        <%= form_with model: @post do |f| %>
-          <div class="col-12 mt-4 d-flex justify-content-center">
-            <%= image_tag @post.get_image(400, 400) %>
-          </div>
-          <div class="col-12 mt-4 d-flex justify-content-center">
-            <h4 class="mt-3">説明</h4>
-          </div>
-          <div class="col-12 d-flex justify-content-center">
-            <%= f.text_field :text %>
-          </div>
-          <div class="col-12 mt-4 d-flex justify-content-center">
-            <%= f.submit '更新', class: "btn btn-info mr-4" %>
-            <%= link_to "削除", post_path, method: :delete, class: "btn btn-danger" %>
-          </div>
+        <div class="align-content-center col-12 d-flex justify-content-center mt-4">
+          <% if @post.errors.any? %>
+            <%= @post.errors.count %>件のエラーが発生しました
+            <ul>
+              <% @post.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+        <% if @post.is_draft == false %>
+          <%= form_with model: @post do |f| %>
+            <div class="col-12 mt-4 d-flex justify-content-center">
+              <%= image_tag @post.get_image(400, 400) %>
+            </div>
+            <div class="col-12 mt-4 d-flex justify-content-center">
+              <h4 class="mt-3">説明</h4>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+              <%= f.text_field :text %>
+            </div>
+            <div class="col-12 mt-4 d-flex justify-content-center">
+              <%= f.submit '更新', class: "btn btn-info mr-4" %>
+              <%= link_to "削除", post_path, method: :delete, class: "btn btn-danger" %>
+            </div>
+          <% end %>
+        <% else %>
+          <%= form_with model: @post do |f| %>
+            <div class="col-12 mt-4 d-flex justify-content-center">
+              <%= image_tag @post.get_image(400, 400) %>
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-3">
+              <%= f.file_field :image, accept: "image/*" %>
+            </div>
+            <div class="col-12 mt-4 d-flex justify-content-start">
+              <h4 class="mt-3">地域</h4>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+              <%= f.select :area_id, options_from_collection_for_select(Area.all, :id, :area_name), { prompt: "選択してください", selected: @post&.area&.id } %>
+            </div>
+            <div class="col-12 mt-4 d-flex justify-content-start">
+              <h4 class="mt-3">気温</h4>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+              <%= f.select :temperature_id, options_from_collection_for_select(Temperature.all, :id, :temperature_name), { prompt: "選択してください" } %>
+            </div>
+            <div class="col-12 mt-4 d-flex justify-content-start">
+              <h4 class="mt-3">説明</h4>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+              <%= f.text_field :text %>
+            </div>
+            <div class="col-12 mt-4 d-flex justify-content-center">
+              <%= f.submit '下書きに保存', :name => 'draft', class: "btn btn-secondary mr-4" %>
+              <%= f.submit '投稿', :name => 'public', class: "btn btn-info mr-4" %>
+              <%= link_to "削除", post_path, method: :delete, class: "btn btn-danger" %>
+            </div>
+          <% end %>
         <% end %>
       </div>
-      <div class="col-12 d-flex align-items-center justify-content-end mb-5">
-        <%= link_to "BACK", post_path(@post.id) %>
+      <div class="col-12 d-flex align-items-center justify-content-end my-5">
+        <%= link_to posts_path (@post.id) do %>
+          <i class="fa-regular fa-circle-left fa-2x"></i>
+        <% end %>
       </div>
     </div>
   </div>

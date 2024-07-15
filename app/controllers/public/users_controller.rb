@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page])
+    @posts = @user.posts.where(is_draft: false).page(params[:page])
   end
 
   def edit
@@ -38,6 +38,12 @@ class Public::UsersController < ApplicationController
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to root_path
   end
+  
+  def draft
+    @user = current_user
+    @posts =@user.posts.where(is_draft: true)
+  end
+  
   
   private
   

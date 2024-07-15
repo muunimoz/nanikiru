@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2024_05_23_181455) do
     t.integer "area_id"
     t.integer "temperature_id"
     t.string "text", null: false
+    t.boolean "is_draft", default: false
   end
 
   create_table "temperatures", force: :cascade do |t|

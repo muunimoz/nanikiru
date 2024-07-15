@@ -4,8 +4,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  belongs_to :area
-  belongs_to :temperature
+  belongs_to :area, optional: true
+  belongs_to :temperature, optional: true
 
   def self.search(keyword, area_name, temperature_name)
     if keyword.present?
@@ -21,29 +21,48 @@ class Post < ApplicationRecord
     end
     @posts
   end
-
+  
   def area_name
-     Area.find(self.area_id).area_name
+    if self.area_id.present?
+      Area.find(self.area_id).area_name
+    else
+      "未選択"
+    end
   end
 
   def temperature_name
-    Temperature.find(self.temperature_id).temperature_name
+    if self.temperature_id.present?
+      Temperature.find(self.temperature_id).temperature_name
+    else
+      "未選択"
+    end
   end
 
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      image.attach(io: File.open(file_path), filename: 'dafault-image.jpg', content_type: 'image/jpeg')
+      image.attach(io: File.open(file_path), filename: 'dafault-imagZZe.jpg', content_type: 'image/jpeg')
     end
       image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  def get_cut_image(width, height)
+    unless image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      image.attach(io: File.open(file_path), filename: 'dafault-imagZZe.jpg', content_type: 'image/jpeg')
+    end
+      image.variant(resize_to_fill: [256,170]).processed
+  end
+
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
 
-  validates :image, presence: true
-  validates :area, presence: true
-  validates :temperature, presence: true
+  with_options presence: true, on: :publicize do
+    validates :image
+    validates :area
+    validates :temperature
+  end
 
 end
