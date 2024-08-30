@@ -23,6 +23,14 @@
           <div class="col-12 d-flex justify-content-center ">
             <%= f.file_field :profile_image, accept: "image/*" %>
           </div>
+          
+          <div class="col-12 mt-4 d-flex justify-content-start">
+            <h4 class="mt-3">登録状態</h4>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <%= f.select :is_active, options_for_select([["有効",true], ["無効", false]], @user.is_active) %>
+          </div>
+          
           <div class="col-12 mt-4 d-flex justify-content-center">
             <%= f.submit "更新", class: "btn btn-info" %>
           </div>

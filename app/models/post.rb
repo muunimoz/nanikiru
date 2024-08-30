@@ -8,10 +8,9 @@ class Post < ApplicationRecord
   belongs_to :temperature, optional: true
 
   def self.search(keyword, area_name, temperature_name)
+    @posts = Post.all
     if keyword.present?
       @posts = Post.where('text LIKE(?)', "%#{keyword}%")
-    else
-      @posts = Post.all
     end
     if area_name.present?
       @posts = @posts.left_joins(:areas).where(areas:{area_name: area_name})
@@ -51,7 +50,7 @@ class Post < ApplicationRecord
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       image.attach(io: File.open(file_path), filename: 'dafault-imagZZe.jpg', content_type: 'image/jpeg')
     end
-      image.variant(resize_to_fill: [256,170]).processed
+      image.variant(resize_to_fill: [256, 170]).processed
   end
 
 
@@ -63,6 +62,7 @@ class Post < ApplicationRecord
     validates :image
     validates :area
     validates :temperature
+    validates :text
   end
 
 end

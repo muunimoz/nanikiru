@@ -1,6 +1,18 @@
 <div class="container-fluid pb-5">
   <div class="row align-content-center d-flex justify-content-center mt-5">
     <div class="col-12 col-md-6 shadow-lg p-5">
+      
+      <div class="align-content-center col-12 d-flex justify-content-center mt-4">
+        <% if @comment.errors.any? %>
+          <%= @comment.errors.count %>件のエラーが発生しました
+          <ul>
+            <% @comment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+          <% end %>
+        </div>
+        
       <%= link_to user_path(@post.user.id) do %>
         <div class="row d-flex align-items-center justify-content-center mb-3">
           <div class="col-5 d-flex justify-content-end">

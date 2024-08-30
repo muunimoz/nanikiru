@@ -18,7 +18,9 @@
 - 自分の考えたコーディネートを投稿する時
 ​
 ## 設計書
-後ほど作成予定
+- 画面設計 : https://drive.google.com/file/d/1j68GJL5CQlP5Np0YCUxCC2Wh7yy2tDMd/view?usp=sharing
+- テーブル定義書 : https://docs.google.com/spreadsheets/d/1KgQzff2hbO_dxYBnBe1S2Xb0bvTGFnLQnFBa4Cb7qZ0/edit?usp=sharing
+- 詳細設計 : https://docs.google.com/spreadsheets/d/1gx1DqIrX5-U11IQBl3PmlwIocBck5U4_RNyEGerWu4w/edit?usp=sharing
 
 #### 実装機能リスト
 https://docs.google.com/spreadsheets/d/1r7gLND0ciEntaUju7oi7x5UP7p7y5bXLpELOqlZ_YVA/edit?usp=sharing
@@ -30,3 +32,6 @@ https://docs.google.com/spreadsheets/d/1r7gLND0ciEntaUju7oi7x5UP7p7y5bXLpELOqlZ_
 - JSライブラリ：jQuery
 - IDE：Cloud9
 ​
+## 使用素材
+- Pexels : https://www.pexels.com/ja-jp/
+- ツカッテ : https://tsukatte.com/
