@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(){
+  function selectFile(){
   // 新規投稿・編集ページのフォームを取得
   const postForm = document.getElementById('form_post');
   // プレビューを表示するためのスペースを取得
@@ -36,4 +36,7 @@ document.addEventListener('DOMContentLoaded', function(){
   previewWrapper.appendChild(previewImage);
   previewList.appendChild(previewWrapper);
   });
-});
+  }
+  window.selectFile=selectFile
+  $(document).ready(selectFile);
+  document.addEventListener('turbolinks:load', selectFile);

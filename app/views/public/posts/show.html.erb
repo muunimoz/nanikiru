@@ -3,14 +3,9 @@
     <div class="col-12 col-md-6 shadow-lg p-5">
       
       <div class="align-content-center col-12 d-flex justify-content-center mt-4">
-        <% if @comment.errors.any? %>
-          <%= @comment.errors.count %>件のエラーが発生しました
           <ul>
-            <% @comment.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
+            <li><%= alert %></li>
           </ul>
-          <% end %>
         </div>
         
       <%= link_to user_path(@post.user.id) do %>
@@ -32,6 +27,11 @@
             <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-primary" %>
           <% end %>
         </div>
+        
+        <% @post_tags.each do |tag| %>
+        <%= link_to tag.name, search_tags_path(tag_id: tag.id) %>
+        <% end %>
+        
         <div class="col-12 d-flex justify-content-center mt-3">
           <p>地域：<%= @post.area_name %></p>
         </div>

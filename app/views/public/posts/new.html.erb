@@ -22,12 +22,12 @@
             <h4 class="mt-3">画像</h4>
           </div>
           <div class="col-12 d-flex justify-content-center">
-            <%= f.file_field :image, accept: "image/*" %>
+            <%= f.file_field :image, accept: "image/*", onchange: 'selectFile()' %>
           </div>
           <div class="col-12 d-flex justify-content-center">
             <div class="w-50 ">
               <div id="previews"></div>
-          </div>
+            </div>
           </div>
           <div class="col-12 mt-4 d-flex justify-content-center">
             <h4 class="mt-3">地域</h4>
@@ -46,6 +46,12 @@
           </div>
           <div class="col-12 d-flex justify-content-center">
             <%= f.text_field :text %>
+          </div>
+          <div class="col-12 mt-4 d-flex justify-content-center">
+            <h4 class="mt-3">タグ</h4>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <%= f.text_field :tags, value: @post.tags.map(&:name).join(", ") %>
           </div>
           <div class="col-12 mt-4 d-flex justify-content-center">
             <%= f.submit '投稿', :name => 'public', class: "btn btn-info mr-4" %>

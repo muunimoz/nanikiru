@@ -9,27 +9,30 @@ class Public::PostsController < ApplicationController
    def create 
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    post_tags = params[:post][:tags].split(',') if params[:post][:tags]
     if params[:public]
       if @post.save(context: :publicize)
-        redirect_to post_path(@post.id), notice: "投稿しました"
+        @post.save_post_tags(post_tags)
+        redirect_to post_path(@post.id)
       else
-        render :new, alert: "投稿できませんでした。"
+        render :new
       end
     else
       if @post.update(is_draft: true)
-        redirect_to user_path(current_user), notice: "下書き保存しました！"
+        redirect_to user_path(current_user)
       else
-        render :new, alert: "投稿できませんでした。"
+        render :new
       end
     end
   end
 
   def index
     @posts = Post.where(is_draft: false).page(params[:page])
+    @tags = Tag.all
   end
 
   def search
-    @posts = Post.search(params[:keyword], params[:area_id], params[:temperature_id])
+    @posts = Post.search(params[:keyword], params[:area_name], params[:temperature_name])
     @posts = @posts.where(is_draft: false).page(params[:page])
   end
 
@@ -39,10 +42,12 @@ class Public::PostsController < ApplicationController
     favorites = Favorite.where(post_id: @post.id).pluck(:user_id)
     @favorite_users = User.find(favorites)
     @comment = Comment.new
+    @post_tags = @post.tags
   end
 
   def edit
     @post = Post.find(params[:id])
+    @post_tags = @post.tags.pluck(:name).join(',')
   end
 
   def update
@@ -52,26 +57,34 @@ class Public::PostsController < ApplicationController
       # updateメソッドにはcontextが使用できないため、公開処理にはattributesとsaveメソッドを使用する
       @post.attributes = post_params.merge(is_draft: false)
       if @post.save(context: :publicize)
-        redirect_to post_path(@post.id), notice: "下書きを公開しました！"
+        redirect_to post_path(@post.id)
       else
         @post.is_draft = true
-        render :edit, alert: "公開できませんでした。。"
+        render :edit
       end
   # ②公開済みの更新の場合
     elsif params[:update]
       @post.attributes = post_params
       if @post.save(context: :publicize)
-        redirect_to post_path(@post.id), notice: "更新しました！"
+        redirect_to post_path(@post.id)
       else
-        render :edit, alert: "更新できませんでした。"
+        render :edit
       end
-# ③下書きの更新（非公開）の場合
+  # ③下書きの更新（非公開）の場合
     else
       if @post.update(post_params)
-        redirect_to post_path(@post.id), notice: "下書きを更新しました！"
+        redirect_to post_path(@post.id)
       else
-          render :edit, alert: "更新できませんでした。"
+          render :edit
       end
+    end
+    plan_tags = params[:plan][:tags].split(',') if params[:plan][:tags]
+    if @plan.update(plan_params)
+      @plan.tags.destroy_all
+      @plan.save_plan_tags(plan_tags)
+      redirect_to plan_path(@plan)
+    else
+      render 'edit'
     end
   end
 
@@ -90,7 +103,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:image, :text, :area_id, :temperature_id, :is_draft)
+    params.require(:post).permit(:image, :text, :area_id, :temperature_id, :is_draft )
   end
 
   def is_matching_login_user
