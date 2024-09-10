@@ -9,10 +9,8 @@ class Public::PostsController < ApplicationController
    def create 
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    post_tags = params[:post][:tags].split(',') if params[:post][:tags]
     if params[:public]
       if @post.save(context: :publicize)
-        @post.save_post_tags(post_tags)
         redirect_to post_path(@post.id)
       else
         render :new
@@ -28,7 +26,6 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = Post.where(is_draft: false).page(params[:page])
-    @tags = Tag.all
   end
 
   def search
@@ -42,22 +39,21 @@ class Public::PostsController < ApplicationController
     favorites = Favorite.where(post_id: @post.id).pluck(:user_id)
     @favorite_users = User.find(favorites)
     @comment = Comment.new
-    @post_tags = @post.tags
   end
 
   def edit
     @post = Post.find(params[:id])
-    @post_tags = @post.tags.pluck(:name).join(',')
   end
 
   def update
     @post = Post.find(params[:id])
     if params[:public]
+      
       # 公開時にバリデーションを実施
       # updateメソッドにはcontextが使用できないため、公開処理にはattributesとsaveメソッドを使用する
       @post.attributes = post_params.merge(is_draft: false)
       if @post.save(context: :publicize)
-        redirect_to post_path(@post.id)
+        redirect_to post_path(@post)
       else
         @post.is_draft = true
         render :edit
@@ -78,21 +74,7 @@ class Public::PostsController < ApplicationController
           render :edit
       end
     end
-    plan_tags = params[:plan][:tags].split(',') if params[:plan][:tags]
-    if @plan.update(plan_params)
-      @plan.tags.destroy_all
-      @plan.save_plan_tags(plan_tags)
-      redirect_to plan_path(@plan)
-    else
-      render 'edit'
-    end
   end
-
-
-  #   post = Post.find(params[:id])
-  #   post.update(post_params)
-  #   redirect_to post_path(post.id)
-  # end
 
   def destroy
     post = Post.find(params[:id])

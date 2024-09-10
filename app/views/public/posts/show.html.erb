@@ -1,13 +1,6 @@
 <div class="container-fluid pb-5">
   <div class="row align-content-center d-flex justify-content-center mt-5">
     <div class="col-12 col-md-6 shadow-lg p-5">
-      
-      <div class="align-content-center col-12 d-flex justify-content-center mt-4">
-          <ul>
-            <li><%= alert %></li>
-          </ul>
-        </div>
-        
       <%= link_to user_path(@post.user.id) do %>
         <div class="row d-flex align-items-center justify-content-center mb-3">
           <div class="col-5 d-flex justify-content-end">
@@ -27,11 +20,6 @@
             <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-primary" %>
           <% end %>
         </div>
-        
-        <% @post_tags.each do |tag| %>
-        <%= link_to tag.name, search_tags_path(tag_id: tag.id) %>
-        <% end %>
-        
         <div class="col-12 d-flex justify-content-center mt-3">
           <p>地域：<%= @post.area_name %></p>
         </div>
@@ -68,6 +56,9 @@
           <div class="col-12 d-flex justify-content-start">
             コメント件数：<%= @post.comments.count %>
           </div>
+        </div>
+        <div class="align-content-center col-12 d-flex justify-content-center mt-4">
+          <p><%= alert %></p>
         </div>
         <div class="row">
           <div class="col-12 d-flex justify-content-start">

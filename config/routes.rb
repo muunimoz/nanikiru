@@ -27,11 +27,6 @@ Rails.application.routes.draw do
         get :search
       end
     end
-    resources :tags do
-      collection do
-        get :search
-      end
-    end
     get '/users/check' => 'users#check'
     patch '/users/withdraw' => 'users#withdraw'
     resources :users, only: [:show, :edit, :update] do
